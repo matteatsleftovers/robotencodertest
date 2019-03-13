@@ -134,4 +134,24 @@ public class ArmTest {
         double result = Arm.toCounts(360.0);
         assertEquals(6280.533, result, 0.01);
     }
+
+    @Test
+    public void encoder_count_1570_makes_90_degrees_of_movement() {
+        double result = Arm.toDegrees(1570.133);
+        assertEquals(90, result, 0.1);
+    }
+
+    @Test
+    public void encoder_count_4096_makes_235_degrees_of_movement() {
+        // 4096 is the encoder count for a full revolution at the gearbox
+        double result = Arm.toDegrees(4096);
+        assertEquals(234.8, result, 0.1);
+    }
+
+    @Test
+    public void encoder_count_2180_makes_full_range_of_movement() {
+        // 125° is the full range from 85° to 210°
+        double result = Arm.toDegrees(2180);
+        assertEquals(125.0, result, 0.1);
+    }
 }
