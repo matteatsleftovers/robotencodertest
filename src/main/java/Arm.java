@@ -37,18 +37,18 @@ class Arm {
 
     private void setAngle(double angle) {
         angle = Utility.clamp(angle, MINIMUM_ANGLE, MAXIMUM_ANGLE);
-        double counts = toCounts(STARTING_ANGLE - angle);
+        double counts = toCounts(angle - STARTING_ANGLE);   // Measure the DIFFERENCE!
         talonAndController.setSetpoint(counts);
     }
 
     double getAngle() {
         double quadraturePosition = talonAndController.getQuadraturePosition();
-        return STARTING_ANGLE - toDegrees(quadraturePosition);
+        return STARTING_ANGLE + toDegrees(quadraturePosition);
     }
 
     double getSetpointDegrees() {
         double counts = talonAndController.getSetpoint();
-        return STARTING_ANGLE - toDegrees(counts);
+        return STARTING_ANGLE + toDegrees(counts);
     }
 
     double calculateFeedForward() {
